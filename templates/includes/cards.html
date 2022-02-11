@@ -1,0 +1,254 @@
+<div id="cards" >
+    <div class="card">
+        <div class="user-holder">
+            <div class="card-username">{{ posts[0].get('user').get('username')}}</div>
+            <div class="ellipse">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </div>
+        <img class = "post" alt = "image captioned {{posts[0].get('title')}}" src = "{{ posts[0].get('image_url')}}"></img>
+        <div class="icons">
+            <div class="three">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+            </div>
+            <div class="save">
+                <i class="far fa-bookmark"></i>
+            </div>
+        </div>
+        <p class="likes">{{ posts[0].get('likes')}} likes</p>
+
+        <!-- <div class="caption">
+            <p class="caption-username">{{ posts[0].get('user').get('username')}}</p>
+            <div class="caption-holder">
+                <p class="caption-words">{{ posts[0].get('title')}}</p>
+                <a href="url" class="more">more</a>
+            </div>
+        </div> -->
+        <div class="caption">
+            <p class="caption-username">{{ posts[0].get('user').get('username')}}</p>
+            <p class="caption-words">{{ posts[0].get('title')}}
+                <a href="url" class="more">more</a>
+            </p>
+        </div>
+        
+        {% if posts[0].get('comments')|length == 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[0].get('text')}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% if posts[0].get('comments')|length > 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[0].get('text')}}</p>
+            </div>
+            <a href="" class="all-comments">View all {{ posts[0].get('comments')|length }}  comments</a>
+            <!-- <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[0].get('text')}}</p>
+            </div>
+            <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[1].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[1].get('text')}}</p>
+            </div> -->
+        </div>
+        {% endif %}
+        <div class="date-posted">{{ posts[0].get('display_time')}}</div>
+        <div class="add-comment">
+            <div class ="pt1">
+                <i class="far fa-smile"></i>
+                <p>Add comment...</p>
+            </div>
+            <a href="url" class="pt2">Post</a>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="user-holder">
+            <div class="card-username">{{ posts[1].get('user').get('username')}}</div>
+            <div class="ellipse">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </div>
+        <img class = "post" alt = "image captioned {{posts[1].get('title')}}" src = "{{ posts[1].get('image_url')}}"></img>
+        <div class="icons">
+            <div class="three">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+            </div>
+            <div class="save">
+                <i class="far fa-bookmark"></i>
+            </div>
+        </div>
+        <p class="likes">{{ posts[1].get('likes')}} likes</p>
+        <div class="caption">
+            <p class="caption-username">{{ posts[1].get('user').get('username')}}</p>
+            <p class="caption-words">{{ posts[1].get('title')}}
+                <a href="url" class="more">more</a>
+            </p>
+        </div>
+        {% if posts[1].get('comments')|length == 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[1].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[1].get('comments')[0].get('text')}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% if posts[1].get('comments')|length > 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[1].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[1].get('comments')[0].get('text')}}</p>
+            </div>
+            <a href="" class="all-comments">View all {{ posts[1].get('comments')|length }}  comments</a>
+            <!-- <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[0].get('text')}}</p>
+            </div>
+            <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[1].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[1].get('text')}}</p>
+            </div> -->
+        </div>
+        {% endif %}
+        <div class="date-posted">{{ posts[1].get('display_time')}}</div>
+        <div class="add-comment">
+            <div class ="pt1">
+                <i class="far fa-smile"></i>
+                <p>Add comment...</p>
+            </div>
+            <a href="url" class="pt2">Post</a>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="user-holder">
+            <div class="card-username">{{ posts[2].get('user').get('username')}}</div>
+            <div class="ellipse">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </div>
+        <img class = "post" alt = "image captioned {{posts[2].get('title')}}" src = "{{ posts[2].get('image_url')}}"></img>
+        <div class="icons">
+            <div class="three">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+            </div>
+            <div class="save">
+                <i class="far fa-bookmark"></i>
+            </div>
+        </div>
+        <p class="likes">{{ posts[2].get('likes')}} likes</p>
+        <div class="caption">
+            <p class="caption-username">{{ posts[2].get('user').get('username')}}</p>
+            <p class="caption-words">{{ posts[2].get('title')}}
+                <a href="url" class="more">more</a>
+            </p>
+        </div>
+        {% if posts[2].get('comments')|length == 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[2].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[2].get('comments')[0].get('text')}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% if posts[2].get('comments')|length > 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[2].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[2].get('comments')[0].get('text')}}</p>
+            </div>
+            <a href="" class="all-comments">View all {{ posts[2].get('comments')|length }}  comments</a>
+            <!-- <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[0].get('text')}}</p>
+            </div>
+            <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[1].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[1].get('text')}}</p>
+            </div> -->
+        </div>
+        {% endif %}
+        <div class="date-posted">{{ posts[2].get('display_time')}}</div>
+        <div class="add-comment">
+            <div class ="pt1">
+                <i class="far fa-smile"></i>
+                <p>Add comment...</p>
+            </div>
+            <a href="url" class="pt2">Post</a>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="user-holder">
+            <div class="card-username">{{ posts[3].get('user').get('username')}}</div>
+            <div class="ellipse">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </div>
+        <img class = "post" alt = "image captioned {{posts[3].get('title')}}" src = "{{ posts[3].get('image_url')}}"></img>
+        <div class="icons">
+            <div class="three">
+                <i class="far fa-heart" ></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+            </div>
+            <div class="save">
+                <i class="far fa-bookmark"></i>
+            </div>
+        </div>
+        <p class="likes">{{ posts[3].get('likes')}} likes</p>
+        <div class="caption">
+            <p class="caption-username">{{ posts[3].get('user').get('username')}}</p>
+            <p class="caption-words">{{ posts[3].get('title')}}
+                <a href="url" class="more">more</a>
+            </p>
+        </div>
+        {% if posts[3].get('comments')|length == 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[3].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[3].get('comments')[0].get('text')}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% if posts[0].get('comments')|length > 1 %}
+        <div class="comments">
+            <div class="comment">
+                <p class="comment-username">{{ posts[3].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[3].get('comments')[0].get('text')}}</p>
+            </div>
+            <a href="" class="all-comments">View all {{ posts[3].get('comments')|length }}  comments</a>
+            <!-- <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[0].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[0].get('text')}}</p>
+            </div>
+            <div class="comment">
+                <p class="comment-username">{{ posts[0].get('comments')[1].get('user').get('username')}} </p>
+                <p class="comment-words">{{ posts[0].get('comments')[1].get('text')}}</p>
+            </div> -->
+        </div>
+        {% endif %}
+        <div class="date-posted">{{ posts[3].get('display_time')}}</div>
+        <div class="add-comment">
+            <div class ="pt1">
+                <i class="far fa-smile"></i>
+                <p>Add comment...</p>
+            </div>
+            <a href="url" class="pt2">Post</a>
+        </div>
+    </div>
+    
+</div>

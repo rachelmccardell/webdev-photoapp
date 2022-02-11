@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Photo App</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'includes/navbar.html' %}
+    <div id = "content">
+        <section id = "feed">
+            {% include 'includes/stories.html' %}
+            <div id="separator"></div>
+            {% include 'includes/cards.html' %}
+        </section>
+        {% include 'includes/suggestions.html' %}
+    </div>
+</body>
+</html>
+
+<!-- Right now this is just a template for what will ultimately be a functional web app,
+    but assuming it is functional and contains another page where users can actually post,
+    one could include a feature on that page that allows users to add alt text to their posts.
+    Similar to the way Instagram does it, one could provide a space to add alt text in the same way
+    that there is a space to tag other users or add a location. This could be a simple input line,
+    and then once the user actually posts it, there can be another icon next to the "like", "comment",
+    and "share" icons that displays the alt text when hovered over.-->

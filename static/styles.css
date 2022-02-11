@@ -1,0 +1,300 @@
+h1 {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    padding: auto;
+    font-family: 'Comfortaa', cursive;
+    background-color: white;
+    position:fixed;
+    top:0;
+    margin-top: 0;
+}
+#app-name {
+    float: left;
+    margin-left: 2%;
+}
+#app-name * {
+    font-size: 0.6em;
+}
+#nav-bar-info{
+    display: flex;
+    position: absolute;
+    right: 15px;
+    font-size: 0.5em;
+}
+#username {
+    margin-right: 10px;
+}
+#sign-out {
+    color: rgb(66 103 178);
+}
+body {
+    background-color: rgb(220,220,220);
+}
+#content {
+    display: flex;
+    width: 100%;
+    margin-top: 70px;
+}
+section {
+    padding: 0px 20px 0px 20px;
+}
+#feed {
+    width: 480px;
+    margin-left: 10%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 10px;
+    height: 400px;
+}
+#for-you {
+    position: fixed;
+    right:0;
+    width: 400px;
+}
+h2 {
+    display: flex;
+    font-family: 'Comfortaa', cursive;
+    font-size: 2em;
+}
+#prof-pic {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+}
+#recs-username {
+    padding-top: 25px;
+    margin-left: 20px;
+}
+#suggestions {
+    color: grey;
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+#recommendations .rec{
+    height: 60px;
+    display: flex;
+    font-family: sans-serif;
+}
+
+.rec img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+.rec .details {
+    margin-left: 10px;
+    width: 50%;
+}
+.details p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.suggested {
+    color: grey;
+}
+.follow {
+    color: rgb(66 103 178);
+    text-decoration: none;
+}
+.username {
+    font-weight: 700;
+}
+#stories {
+    display: flex;
+    font-size: 0.7em;
+    width: 480px;
+    margin: 10px 0 0 0;
+    justify-content: left;
+    background-color: white;
+}
+.story {
+    margin: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.story img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgb(220,220,220);
+    border-width: 2px;
+    display: flex;
+    justify-content: center;
+}
+.story-username {
+    color: grey;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif; 
+    font-weight: 500;
+    padding-top: 2px;
+}
+#separator {
+    height: 40px;
+    width: 100%;
+}
+
+
+.card {
+    background-color: white;
+    height: 640px;
+    width: 470px;
+    margin-bottom: 20px;
+}
+.user-holder {
+    display: flex;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.5em;
+    width: 100%;
+    height: 60px;
+    justify-content:space-between;
+}
+.card-username {
+    padding-left: 10px;
+    padding-top: 15px;
+}
+.ellipse {
+    padding-top: 15px;
+    padding-right: 15px;
+}
+.post {
+    width: 470px;
+    height: 350px;
+}
+.icons {
+    height: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+.icons i{
+    padding: 3px;
+}
+.save {
+    padding-right: 15px;
+}
+.likes {
+    height: 20px;
+    margin: auto;
+    padding: 15px 0px 0px 10px;
+    font-weight: 700;
+    font-family: sans-serif;
+    font-size: 0.9em;
+}
+.caption {
+    display: flex;
+    padding-left: 10px;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    height: 23px;
+}
+
+.caption-username {
+    font-weight: 700;
+    margin: 0;
+    padding-right: 5px;
+}
+.caption-words {
+    margin:0;
+    margin-right: 5px;
+    height: 23px;
+    width: 100%;
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+}
+.more {
+    text-decoration: none;
+    color: rgb(66 103 178);
+    height: 23px;
+    width: 100%;
+}
+/* .caption-holder {
+    margin:0;
+    padding-right: 5px;
+    width: 100%;
+} */
+.comments {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    width: 100%;
+}
+.comment{
+    display: flex;
+    padding-left: 10px;
+    height: 30px;
+}
+.all-comments {
+    color: rgb(66 103 178);
+    padding-left: 10px;
+    text-decoration: none;
+    height: 30px;
+    margin-top: 5px;
+}
+.comment-username {
+    font-weight: 700;
+    padding-right: 5px;
+    margin: 0;
+}
+.comment-words {
+    margin:0;
+    padding-right: 5px;
+    width: 100%;
+}
+.date-posted{
+    font-size: 0.8em;
+    font-family: sans-serif;
+    padding-left: 10px;
+    color: grey;
+    height: 20px;
+    padding-top: 5px;
+}
+.add-comment {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    border-top: 2px solid grey;
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+.pt1 {
+    display: flex;
+}
+.pt1 p{
+    padding-left: 10px;
+    color: rgb(220,220,220);
+}
+.pt1 i{
+    padding-top: 15px;
+}
+.pt2 {
+    color: rgb(66 103 178);
+    padding-right: 15px;
+    text-decoration: none;
+    padding-top: 15px;
+}
+
+
+/* Mobile Phone Media Query */
+@media only screen and (max-width: 850px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #feed {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    #for-you {
+        visibility: hidden;
+    }
+    
+}
+
+
