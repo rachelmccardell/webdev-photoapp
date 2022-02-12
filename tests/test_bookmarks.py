@@ -22,7 +22,7 @@ class TestBookmarkListEndpoint(unittest.TestCase):
     def test_bookmarks_get_check_if_data_structure_correct(self):
         response = requests.get('{0}/api/bookmarks'.format(root_url))
         self.assertEqual(response.status_code, 200)
-        bookmarks = response.json()
+        bookmarks = response.json() 
         bookmark = bookmarks[0]
         
         bookmark_db = utils.get_bookmark_by_id(bookmark.get('id'))
