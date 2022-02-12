@@ -1,3 +1,4 @@
+from curses import intrflush
 from flask import Response, request
 from flask_restful import Resource
 from models import Post, User, db
@@ -68,8 +69,11 @@ class PostDetailEndpoint(Resource):
         self.current_user = current_user
         
     def patch(self, id):
+        if not str.isdigit(id):
+            return Response(json.dumps({'message': 'Invalid post id'}), mimetype="application/json", status=400)
+        print("ID: ", id)
         post = Post.query.get(id)
-
+    
         # a user can only edit their own post:
         if not post or post.user_id != self.current_user.id:
             return Response(json.dumps({'message': 'Post does not exist'}), mimetype="application/json", status=404)

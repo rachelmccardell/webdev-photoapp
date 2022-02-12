@@ -273,11 +273,11 @@ if __name__ == '__main__':
         TestPostListEndpoint('test_post_post_bad_data_400_error'),          # post (create)
 
         # Detail Endpoint Tests
-        # TestPostDetailEndpoint('test_post_patch'),                          # patch (update)
-        # TestPostDetailEndpoint('test_post_patch_blanks_not_overwritten'),   # patch (update)
-        # TestPostDetailEndpoint('test_post_patch_invalid_id_400'),           # patch (update)
-        # TestPostDetailEndpoint('test_post_patch_id_does_not_exist_404'),    # patch (update)
-        # TestPostDetailEndpoint('test_post_patch_unauthorized_id_404'),      # patch (update)
+        TestPostDetailEndpoint('test_post_patch'),                          # patch (update)
+        TestPostDetailEndpoint('test_post_patch_blanks_not_overwritten'),   # patch (update)
+        TestPostDetailEndpoint('test_post_patch_invalid_id_400'),           # patch (update)
+        TestPostDetailEndpoint('test_post_patch_id_does_not_exist_404'),    # patch (update)
+        TestPostDetailEndpoint('test_post_patch_unauthorized_id_404'),      # patch (update)
         
         TestPostDetailEndpoint('test_post_delete'),                         # delete
         TestPostDetailEndpoint('test_post_delete_invalid_id_400'),          # delete
