@@ -48,6 +48,13 @@ def home():
         user=app.current_user
     )
 
+@app.route('/lab6')
+def lab6():
+    return render_template(
+        'lab6.html', 
+        user=app.current_user
+    )   
+
 @app.route('/api')
 def api_docs():
     navigator = ApiNavigator(app.current_user)

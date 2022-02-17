@@ -1,0 +1,41 @@
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: flex-end; /*left,right alignment*/
+}
+
+#suggestions {
+    width: 350px;
+    background-color: #f2f2f2;
+}
+
+.suggestion {
+    display: grid;
+    grid-template-columns: 40px auto 70px;
+    align-items: center; /*vertical alignment */
+    padding: 5px;
+}
+
+.suggestion p {
+    margin: 0;
+}
+
+.suggestion img {
+    border-radius: 15px;
+}
+
+.suggestion .username {
+    font-weight: bold;
+}
+
+.suggestion .suggestion-text {
+    font-size: 0.9em;
+    color: #555;
+}
