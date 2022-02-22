@@ -48,10 +48,10 @@ def home():
         user=app.current_user
     )
 
-@app.route('/lab6')
+@app.route('/suggestions')
 def lab6():
     return render_template(
-        'lab6.html', 
+        'suggestions.html', 
         user=app.current_user
     )   
 
