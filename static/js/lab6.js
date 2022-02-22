@@ -1,10 +1,10 @@
 const toggleFollow = ev  => {
     const elem = ev.currentTarget;
     if (elem.getAttribute('aria-checked') === 'true') {
-        unfollowUser(elem.dataset.userId, elem);
+        followUser(elem.dataset.userId, elem);
     } 
     else {
-        followUser(elem.dataset.followingId, elem);
+        unfollowUser(elem.dataset.followingId, elem);
     };
 };
 
