@@ -1,16 +1,16 @@
 const toggleFollow = ev  => {
     const elem = ev.currentTarget;
     if (elem.getAttribute('aria-checked') === 'true') {
-        followUser(elem.dataset.userId, elem);
+        unfollowUser(elem.dataset.userId, elem);
     } 
     else {
-        unfollowUser(elem.dataset.followingId, elem);
+        followUser(elem.dataset.followingId, elem);
     };
 };
 
 const followUser = (userId, elem) => {
     const postData = {
-        "user_id": userId
+        "user_id": parseInt(userId)
     };
     fetch("/api/following/", {
         method: "POST",

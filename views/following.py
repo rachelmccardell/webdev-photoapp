@@ -27,12 +27,18 @@ class FollowingListEndpoint(Resource):
             return Response(json.dumps({'message': 'Invalid request. Must include user_id of person to follow.'}), mimetype="application/json", status=400)
         
         # Make sure id is an int
-        if type(following_id) is not int:
+        try:
+            following_id = int(following_id)
+        except:
             return Response(json.dumps({'message': 'Invalid request. Must include valid user_id of person to follow.'}), mimetype="application/json", status=400)
+        # if type(following_id) is not int:
+        #     return Response(json.dumps({'message': 'Invalid request. Must include valid user_id of person to follow.'}), mimetype="application/json", status=400)
+       
         # Make sure id of user to follow is a real user id
         user_to_follow = User.query.get(following_id)
         if not user_to_follow:
             return Response(json.dumps({'message': 'Invalid request. User does not exist.'}), mimetype="application/json", status=404)
+        
         # Check if user already follows user to follow
         user_to_follow = Following.query.filter_by(following_id = following_id, user_id = self.current_user.id).all()
         if user_to_follow:
