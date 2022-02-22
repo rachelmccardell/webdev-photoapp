@@ -2,7 +2,6 @@
 
 const toggleBookmark = ev  => {
     const elem = ev.currentTarget;
-    console.log(elem.dataset.bookmarkId);
     if (elem.getAttribute('bookmarked') === 'true') {
         unBookmarkPost(elem.dataset.bookmarkId, elem);
     } 
@@ -34,7 +33,6 @@ const bookmarkPost = (postId, elem) => {
 };
 
 const unBookmarkPost = (bookmarkId, elem) => {
-    console.log("bookmarkId " + bookmarkId);
     fetch(`http://localhost:5000/api/bookmarks/${bookmarkId}`, {
         method: "DELETE",
         headers: {
@@ -56,13 +54,12 @@ const unBookmarkPost = (bookmarkId, elem) => {
 
 const toggleLike = ev  => {
     const elem = ev.currentTarget;
-    console.log(elem.dataset.postId);
     if (elem.getAttribute('liked') === 'true') {
-        unLikePost(elem.dataset.likeId, elem);
+        unLikePost(elem.dataset.postId, elem.dataset.likeId, elem);
     } 
     else {
-        console.log(elem.dataset.likeId);
-        likePost(elem.dataset.postId, elem.dataset.likeId, elem);
+        console.log("postId: " + elem.dataset.postId);
+        likePost(elem.dataset.postId, elem);
     };
 };
 
@@ -78,7 +75,6 @@ const likePost = (postId, elem) => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            console.log(elem);
             elem.setAttribute('liked', 'true');
             elem.classList.add('liked');
             elem.classList.remove('not-liked');
@@ -224,14 +220,6 @@ const post2html = post => {
                 <i class="fa${ post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
             </div>
         <p class="likes">${ post.likes.length} likes</p>
-
-        <!-- <div class="caption">
-            <p class="caption-username">${ post.user.username}</p>
-            <div class="caption-holder">
-                <p class="caption-words">${ post.caption}</p>
-                <a href="url" class="more">more</a>
-            </div>
-        </div> -->
         <div class="caption">
             <p class="caption-username">${ post.user.username}</p>
             <p class="caption-words">${ post.caption}
