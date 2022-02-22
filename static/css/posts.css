@@ -1,6 +1,6 @@
 .card {
     background-color: white;
-    height: 680px;
+    height: 780px;
     width: 470px;
     margin-bottom: 30px;
 }
@@ -32,12 +32,27 @@
     padding-bottom: 5px;
     padding-left: 5px;
 }
+.three {
+    display: flex;
+    justify-content: space-between;
+}
 .icons i{
     padding: 3px;
 }
 .save {
     padding-right: 15px;
 }
+
+.saved {
+    padding-right: 15px;
+}
+.not-liked i {
+    color: default;
+}
+.liked i{
+    color: red;
+}
+
 .likes {
     height: 30px;
     margin: auto;
@@ -51,7 +66,7 @@
     padding-left: 10px;
     font-family: sans-serif;
     font-size: 0.9em;
-    height: 80px;
+    height: auto;
 }
 
 .caption-username {
@@ -78,11 +93,11 @@
     font-family: sans-serif;
     font-size: 0.9em;
     width: 100%;
+    height: auto;
 }
 .comment{
     display: flex;
-    padding-left: 10px;
-    height: 30px;
+    height: auto ;
 }
 .all-comments {
     color: rgb(66 103 178);

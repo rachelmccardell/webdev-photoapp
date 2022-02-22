@@ -11,7 +11,9 @@ class PostLikesListEndpoint(Resource):
     
     def post(self, post_id):
         # Check format of post_id
-        if not str.isdigit(post_id):
+        try:
+            post_id = int(post_id)
+        except:
             return Response(json.dumps({'message': 'Incorrect post_id format.'}), mimetype="application/json", status=400)
 
         # Make sure the post actually exists
@@ -38,7 +40,9 @@ class PostLikesDetailEndpoint(Resource):
     
     def delete(self, post_id, id):
          # Make sure valid id
-        if not str.isdigit(id):
+        try:
+            id = int(id)
+        except:
             return Response(json.dumps({'message': 'Invalid post ID.'}), mimetype="application/json", status=400)
 
         # a user can only delete their own like:

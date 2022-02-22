@@ -46,7 +46,7 @@ class BookmarksListEndpoint(Resource):
             return Response(json.dumps({'message': 'Must include post id to bookmarm post'}), mimetype="application/json", status=400)
         
          # Check that the post exists and is valid
-        post = Post.query.filter_by(id=post_id)
+        post = Post.query.filter_by(id=post_id).all()
         print("POST: ", post)
         if not post:
             return Response(json.dumps({'message': 'Post does not exist'}), mimetype="application/json", status=404)
@@ -59,6 +59,7 @@ class BookmarksListEndpoint(Resource):
         bookmark = Bookmark(self.current_user.id, post_id)
         db.session.add(bookmark)
         db.session.commit()
+        print("Post successfully bookmarked.")
         #Return the new bookmarked post and bookmark id
         return Response(json.dumps(bookmark.to_dict()), mimetype="application/json", status=201)
 
@@ -71,16 +72,22 @@ class BookmarkDetailEndpoint(Resource):
     
     def delete(self, id):
         # Make sure correct format id
-        if not str.isdigit(id):
+        try:
+            id = int(id)
+        except:
             return Response(json.dumps({'message': 'Incorrect id format.'}), mimetype="application/json", status=400)
+        # if not str.isdigit(id):
+        #     return Response(json.dumps({'message': 'Incorrect id format.'}), mimetype="application/json", status=400)
+        
         # Get all bookmarks by user
         bookmarks = Bookmark.query.filter_by(user_id=self.current_user.id).all()
         # If no bookmarks, tell user
         if len(bookmarks) == 0:
             return Response(json.dumps({'message': 'You have no bookmarks.'}), mimetype="application/json", status=404)
         # Cycle through all users' bookmarks. Check if user bookmarked this bookmark. If yes, delete. Else, tell user bookmark not found.
+        print("here")
         for bookmark in bookmarks:
-            if bookmark.id == int(id):
+            if bookmark.id == id:
                 Bookmark.query.filter_by(id=id).delete()
                 db.session.commit()
                 serialized_data = {
