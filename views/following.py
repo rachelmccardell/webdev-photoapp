@@ -30,6 +30,8 @@ class FollowingListEndpoint(Resource):
         try:
             following_id = int(following_id)
         except:
+            print("following id given: ", following_id)
+            print("type of id given: ", type(following_id))
             return Response(json.dumps({'message': 'Invalid request. Must include valid user_id of person to follow.'}), mimetype="application/json", status=400)
         # if type(following_id) is not int:
         #     return Response(json.dumps({'message': 'Invalid request. Must include valid user_id of person to follow.'}), mimetype="application/json", status=400)
@@ -63,7 +65,6 @@ class FollowingDetailEndpoint(Resource):
 
         # a user can only unfollow their own following:
         following = Following.query.filter_by(id=id, user_id=self.current_user.id).all()
-        print("FOLLOWING: ", following)
         if not following:
             return Response(json.dumps({'message': 'Following does not exist'}), mimetype="application/json", status=404)
 
