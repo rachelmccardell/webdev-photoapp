@@ -60,8 +60,14 @@ class FollowingDetailEndpoint(Resource):
     
     def delete(self, id):
        # Make sure valid id
-        if not str.isdigit(id):
-            return Response(json.dumps({'message': 'Invalid post ID.'}), mimetype="application/json", status=400)
+        try:
+            id = int(id)
+        except:
+            print("following id given: ", id)
+            print("type of id given: ", type(id))
+            return Response(json.dumps({'message': 'Invalid request. Must include valid user_id of person to unfollow.'}), mimetype="application/json", status=400)
+        # if not str.isdigit(id):
+        #     return Response(json.dumps({'message': 'Invalid post ID.'}), mimetype="application/json", status=400)
 
         # a user can only unfollow their own following:
         following = Following.query.filter_by(id=id, user_id=self.current_user.id).all()

@@ -16,6 +16,9 @@
     <aside>
         <header>
             <!-- user profile rendered client-side -->
+            <div class="profile">
+                {% include 'includes/profile.html'  %}
+            </div>
         </header>
         <div class="suggestions">
             <p class="suggestion-text">Suggestions for you</p>
@@ -33,10 +36,10 @@
         </header>
 
         <!-- Posts -->
-        <div id="posts">
+
             <!-- Posts rendered client-side -->
-            <p>TBD</p>
-        </div>
+            {% include 'includes/posts.html'  %}
+
 
     </main>
 

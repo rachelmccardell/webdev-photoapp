@@ -49,9 +49,16 @@ def home():
     )
 
 @app.route('/suggestions')
-def lab6():
+def lab06():
     return render_template(
-        'suggestions.html', 
+        '/includes/suggestions.html', 
+        user=app.current_user
+    )   
+
+@app.route('/posts')
+def hw4_posts():
+    return render_template(
+        '/includes/posts.html', 
         user=app.current_user
     )   
 
