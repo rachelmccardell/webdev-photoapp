@@ -1,9 +1,10 @@
+
 .card {
     background-color: white;
     height: 780px;
     width: 470px;
     margin-bottom: 30px;
-}
+} 
 .user-holder {
     display: flex;
     font-family: 'Comfortaa', cursive;
@@ -78,10 +79,7 @@
     margin:0;
     margin-right: 5px;
     width: 100%;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
-}
+} 
 .more {
     text-decoration: none;
     color: rgb(66 103 178);
@@ -149,9 +147,4 @@
     padding-right: 15px;
     text-decoration: none;
     padding-top: 10px;
-}
-
-
-
-
-
+} 

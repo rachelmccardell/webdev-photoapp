@@ -133,7 +133,7 @@ const post2html = post => {
                 <i class="fa${post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
             </div>
         </div>
-        <p class="likes">${ post.likes.length} likes</p>
+        <p class="likes">${ post.likes.length} likes </p>
         <div class="caption">
             <p class="caption-username">${ post.user.username}</p>
             <p class="caption-words">${ post.caption}
@@ -143,10 +143,11 @@ const post2html = post => {
         <div class="date-posted">${ post.display_time}</div>
         <div class="add-comment">
             <div class ="pt1">
-            <i class="far fa-smile"></i>
-            <p>Add comment...</p>
+                <i class="far fa-smile"></i>
+                <p>Add comment...</p>
+            </div>
+            <a href="url" class="pt2">Post</a>
         </div>
-        <a href="url" class="pt2">Post</a>
     </div>`;
     }
     else if (post.comments.length == 1) {
@@ -173,6 +174,7 @@ const post2html = post => {
             <div class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" onclick="toggleBookmark(event)" data-bookmark-id="${post.current_user_bookmark_id}" data-post-id="${post.id}">
                 <i class="fa${ post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
             </div>
+        </div>
         <p class="likes">${ post.likes.length} likes</p>
         <div class="caption">
             <p class="caption-username">${ post.user.username}</p>
@@ -188,11 +190,12 @@ const post2html = post => {
         </div>
         <div class="date-posted">${ post.display_time}</div>
         <div class="add-comment">
-        <div class ="pt1">
-            <i class="far fa-smile"></i>
-            <p>Add comment...</p>
+            <div class ="pt1">
+                <i class="far fa-smile"></i>
+                <p>Add comment...</p>
+            </div>
+            <a href="url" class="pt2">Post</a>
         </div>
-        <a href="url" class="pt2">Post</a>
     </div>`;
     }
     else {
@@ -219,6 +222,7 @@ const post2html = post => {
             <div class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" onclick="toggleBookmark(event)" data-bookmark-id="${post.current_user_bookmark_id}" data-post-id="${post.id}">
                 <i class="fa${ post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
             </div>
+        </div>
         <p class="likes">${ post.likes.length} likes</p>
         <div class="caption">
             <p class="caption-username">${ post.user.username}</p>
