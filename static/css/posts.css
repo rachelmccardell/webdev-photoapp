@@ -1,7 +1,7 @@
 
 .card {
     background-color: white;
-    height: 780px;
+
     width: 470px;
     margin-bottom: 30px;
 } 
@@ -93,6 +93,10 @@
     width: 100%;
     height: auto;
 }
+#comments button {
+    border-style: none;
+    background-color: transparent;
+}
 .comment{
     display: flex;
     height: auto ;
@@ -127,21 +131,23 @@
     font-family: sans-serif;
     font-size: 0.9em;
     border-top: 2px solid grey;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 30px;
     height: 35px;
-    justify-content: space-between;
     padding-left: 10px;
+    background-color: white;
 }
-.pt1 {
-    display: flex;
+
+.add-comment button {
+    background-color: transparent;
+    border-style: none;
 }
+
 .pt1 p{
     padding-left: 10px;
     color: rgb(220,220,220);
 }
-.pt1 i{
-    padding-top: 15px;
-}
+
 .pt2 {
     color: rgb(66 103 178);
     padding-right: 15px;
@@ -229,5 +235,10 @@
 
 #container {
     overflow-y:auto;
+}
+
+input {
+    margin-top: 2px;
+    
 }
 
