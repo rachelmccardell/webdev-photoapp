@@ -87,7 +87,7 @@
     width: 100%;
 }
 
-.comments {
+#comments {
     font-family: sans-serif;
     font-size: 0.9em;
     width: 100%;
@@ -148,3 +148,86 @@
     text-decoration: none;
     padding-top: 10px;
 } 
+
+.modal-bg{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(50, 50, 50, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    width: 80vw;
+    height: 80vh;
+    border-radius: 5px;
+    display: flex;
+    float: left;
+}
+.modal-bg #close {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+
+.modal img {
+    width: 50vw;
+    height: 80vh;
+}
+#modal-user-profile {
+    display: grid;
+    grid-template-columns: 70px auto;
+    align-items: center; /*vertical alignment */
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+#modal-user-profile img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+#modal-username {
+    font-weight: bold;
+    font-size: 1.5em;
+    font-family: 'Comfortaa', cursive;
+}
+
+.modal-comment {
+    display: grid;
+    grid-template-columns: 60px auto 40px;
+    padding-left: 10px;
+}
+
+.modal-comment img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+}
+.modal-comment-username {
+    font-weight: 700;
+}
+
+.modal-comment-words {
+    margin-top: 5px;
+}
+
+.modal-like {
+    height: 30px;
+    width: 30px;
+    margin-top: 10px;
+    background-color: transparent;
+    border-style: none;
+}
+
+#container {
+    overflow-y:auto;
+}
+

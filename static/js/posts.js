@@ -102,6 +102,39 @@ const unLikePost = (postId, likeId, elem) => {
 };
 
 
+// COMMENTING
+
+const postComment = (ev, new_comment) => {
+    const elem = ev.currentTarget;
+    console.log("here");
+    const postData = {
+        "post_id": parseInt(elem.dataset.postId),
+        "text": new_comment
+    };
+    fetch("http://localhost:5000/api/comments", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData)
+        })
+        .then(response => response.json())
+        .then(comment => {
+            console.log(comment);
+            const html = `
+                <p class="comment-username">${comment.user.username} </p>
+                <p class="comment-words">${comment.text}</p> `;
+            var comment_container = document.createElement("div");
+            comment_container.classList.add("comment");
+            comment_container.innerHTML = html;
+            document.getElementById("comments").append(comment_container);
+            console.log(comment_container);
+            // Also reset placeholder text to "Add comment", value to nothing
+            document.getElementById("userComment").value = "";
+        });
+};
+            
+
 
 
 
@@ -141,12 +174,12 @@ const post2html = post => {
             </p>
         </div> 
         <div class="date-posted">${ post.display_time}</div>
+        <div id="comments"></div>
         <div class="add-comment">
             <div class ="pt1">
-                <i class="far fa-smile"></i>
-                <p>Add comment...</p>
+                <input type="text" id="userComment" aria-label="Add a comment" placeholder="Add a comment...">
             </div>
-            <a href="url" class="pt2">Post</a>
+            <button onclick="postComment(event, document.getElementById("userComment").value);" class="pt2" data-post-id="${post.id}">Post</button>
         </div>
     </div>`;
     }
@@ -182,19 +215,18 @@ const post2html = post => {
                 <a href="url" class="more">more</a>
             </p>
         </div>
-        <div class="comments">
+        <div id="comments">
             <div class="comment">
                 <p class="comment-username">${ post.comments[0].user.username} </p>
-                <p class="comment-words">${ post.comments.text}</p>
+                <p class="comment-words">${ post.comments[0].text}</p>
             </div>
         </div>
         <div class="date-posted">${ post.display_time}</div>
         <div class="add-comment">
             <div class ="pt1">
-                <i class="far fa-smile"></i>
-                <p>Add comment...</p>
+                <input type="text" id="userComment" aria-label="Add a comment" placeholder="Add a comment...">
             </div>
-            <a href="url" class="pt2">Post</a>
+            <button onclick="postComment(event, document.getElementById("userComment").value);" class="pt2" data-post-id="${post.id}">Post</button>
         </div>
     </div>`;
     }
@@ -230,23 +262,68 @@ const post2html = post => {
                 <a href="url" class="more">more</a>
             </p>
         </div>
-        <div class="comments">
+        <div id="comments">
             <div class="comment">
                 <p class="comment-username">${ post.comments[0].user.username} </p>
                 <p class="comment-words">${ post.comments[0].text}</p>
             </div>
-            <a href="" class="all-comments">View all ${ post.comments.length }  comments</a>
+            <button onclick="showPostDetail(event)" class="all-comments" data-post-id ="${post.id}">View all ${ post.comments.length }  comments</button>
         </div>
         <div class="date-posted">${ post.display_time}</div>
         <div class="add-comment">
             <div class ="pt1">
-                <i class="far fa-smile"></i>
-                <p>Add comment...</p>
+                <input type="text" id="userComment" aria-label="Add a comment" placeholder="Add a comment...">
             </div>
-            <a href="url" class="pt2">Post</a>
+            <button onclick="postComment(event, document.getElementById("userComment").value);" class="pt2" data-post-id="${post.id}">Post</button>
         </div>
     </div>`;
     };
+};
+
+const showPostDetail = ev => {
+    const elem = ev.currentTarget;
+    fetch(`/api/posts/${elem.dataset.postId}`)
+        .then(response => response.json())
+        .then(post => {
+            const html = `
+                <div class="modal-bg">
+                    <button id="close" onclick="destroyModal(event)" >Close</button>
+                    <div class="modal">
+                        <div>
+                            <img src="${post.image_url}">
+                        </div>
+                        <div id ="container">
+                            <div id="modal-user-profile">
+                                <img src=${post.user.image_url}>
+                                <div id="modal-username">${post.user.username}</div>
+                            </div>
+                            <div id="modal-comments">${post.comments.map(comment2html).join('\n')}</div>
+                        </div>
+                    </div>
+                </div>`;
+                document.querySelector('#modal-container').innerHTML = html;
+
+            
+    });
+};
+
+const destroyModal = ev => {
+    document.querySelector('#modal-container').innerHTML = "";
+};
+
+const comment2html = comment => {
+    const html= `
+        <div class="modal-comment">
+            <img class="modal-prof-pic" src=${comment.user.image_url}>
+            <div class="modal-comment-small">
+                <p class="modal-comment-username">${ comment.user.username} </p>
+                <p class="modal-comment-words">${ comment.text}</p>
+            </div>
+            <button class="modal-like">
+                <i class="far fa-heart"></i>
+            </button>
+        </div>`;
+    return html;
 }
 
 const getPosts = () => {
