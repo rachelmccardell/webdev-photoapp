@@ -15,7 +15,7 @@ body {
 }
 
 .suggestion {
-    width: 300px;
+    width: 350px;
     display: grid;
     grid-template-columns: 40px auto 60px;
     align-items: center; /*vertical alignment */
@@ -48,6 +48,7 @@ body {
 
 .follow {
     background: transparent;
+    right: 10px;
 }
 
 .unfollow {

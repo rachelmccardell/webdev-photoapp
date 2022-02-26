@@ -107,7 +107,8 @@ const unLikePost = (postId, likeId, elem) => {
 
 const postComment = (ev, new_comment) => {
     const elem = ev.currentTarget;
-    console.log("here");
+    console.log("here. " + new_comment);
+
     const postData = {
         "post_id": parseInt(elem.dataset.postId),
         "text": new_comment
@@ -131,7 +132,8 @@ const postComment = (ev, new_comment) => {
             document.getElementById("comments").append(comment_container);
             console.log(comment_container);
             // Also reset placeholder text to "Add comment", value to nothing
-            document.getElementById("userComment").value = "";
+            document.getElementById(`userComment${elem.dataset.postId}`).value = "";
+            getPosts();
         });
 };
             
@@ -187,10 +189,10 @@ const post2html = post => {
         <div class="date-posted">${ post.display_time}</div>
         <div id="comments"></div>
         <div class="add-comment">
-            <div class ="pt1">
-                <input type="text" id="userComment" aria-label="Add a comment" placeholder="Add a comment...">
+            <div class="pt1">
+                <input type="text" id='userComment${post.id}' aria-label="Add a comment" placeholder="Add a comment...">
             </div>
-            <button onclick="postComment(event, document.getElementById("userComment").value);" class="pt2" data-post-id="${post.id}">Post</button>
+            <button onclick="postComment(event, document.getElementById('userComment${post.id}').value);" class="pt2" data-post-id="${post.id}">Post</button>
         </div>
     </div>`;
     }
@@ -238,16 +240,16 @@ const post2html = post => {
         </div>
         <div id="comments">
             <div class="comment">
-                <p class="comment-username">${ post.comments[0].user.username} </p>
-                <p class="comment-words">${ post.comments[0].text}</p>
+                <p class="comment-username">${ post.comments[post.comments.length - 1].user.username} </p>
+                <p class="comment-words">${ post.comments[post.comments.length - 1].text}</p>
             </div>
         </div>
         <div class="date-posted">${ post.display_time}</div>
         <div class="add-comment">
             <div class ="pt1">
-                <input type="text" id="userComment" aria-label="Add a comment" placeholder="Add a comment...">
+                <input type="text" id='userComment${post.id}' aria-label="Add a comment" placeholder="Add a comment...">
             </div>
-            <button onclick="postComment(event, document.getElementById("userComment").value);" class="pt2" data-post-id="${post.id}">Post</button>
+            <button onclick="postComment(event, document.getElementById('userComment${post.id}').value);" class="pt2" data-post-id="${post.id}">Post</button>
         </div>
     </div>`;
     }
@@ -295,17 +297,17 @@ const post2html = post => {
         </div>
         <div id="comments">
             <div class="comment">
-                <p class="comment-username">${ post.comments[0].user.username} </p>
-                <p class="comment-words">${ post.comments[0].text}</p>
+                <p class="comment-username">${ post.comments[post.comments.length - 1].user.username} </p>
+                <p class="comment-words">${ post.comments[post.comments.length - 1].text}</p>
             </div>
             <button onclick="showPostDetail(event)" class="all-comments" data-post-id ="${post.id}">View all ${ post.comments.length }  comments</button>
         </div>
         <div class="date-posted">${ post.display_time}</div>
         <div class="add-comment">
             <div class ="pt1">
-                <input type="text" id="userComment" aria-label="Add a comment" placeholder="Add a comment...">
+                <input type="text" id='userComment${post.id}' aria-label="Add a comment" placeholder="Add a comment...">
             </div>
-            <button onclick="postComment(event, document.getElementById("userComment").value);" class="pt2" data-post-id="${post.id}">Post</button>
+            <button onclick="postComment(event, document.getElementById('userComment${post.id}').value);" class="pt2" data-post-id="${post.id}">Post</button>
         </div>
     </div>`;
     };
