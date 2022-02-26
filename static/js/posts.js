@@ -2,7 +2,7 @@
 
 const toggleBookmark = ev  => {
     const elem = ev.currentTarget;
-    if (elem.getAttribute('bookmarked') === 'true') {
+    if (elem.getAttribute('aria-checked') === 'true') {
         unBookmarkPost(elem.dataset.bookmarkId, elem);
     } 
     else {
@@ -24,7 +24,7 @@ const bookmarkPost = (postId, elem) => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            elem.setAttribute('bookmarked', 'true');
+            elem.setAttribute('aria-checked', 'true');
             elem.classList.add('saved');
             elem.classList.remove('save');
             elem.innerHTML = '<i class="fas fa-bookmark"></i>'
@@ -42,7 +42,7 @@ const unBookmarkPost = (bookmarkId, elem) => {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        elem.setAttribute('bookmarked', 'false');
+        elem.setAttribute('aria-checked', 'false');
         elem.classList.add('save');
         elem.classList.remove('saved');
         elem.innerHTML = '<i class="far fa-bookmark"></i>';
@@ -54,11 +54,12 @@ const unBookmarkPost = (bookmarkId, elem) => {
 
 const toggleLike = ev  => {
     const elem = ev.currentTarget;
-    if (elem.getAttribute('liked') === 'true') {
+    if (elem.getAttribute('aria-checked') === 'true') {
+        console.log("unliking like" + elem.dataset.likeId);
         unLikePost(elem.dataset.postId, elem.dataset.likeId, elem);
     } 
     else {
-        console.log("postId: " + elem.dataset.postId);
+        console.log("liking post");
         likePost(elem.dataset.postId, elem);
     };
 };
@@ -75,7 +76,7 @@ const likePost = (postId, elem) => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            elem.setAttribute('liked', 'true');
+            elem.setAttribute('aria-checked', 'true');
             elem.classList.add('liked');
             elem.classList.remove('not-liked');
             elem.innerHTML = '<i class="fas fa-heart"></i>';
@@ -93,7 +94,7 @@ const unLikePost = (postId, likeId, elem) => {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        elem.setAttribute('liked', 'false');
+        elem.setAttribute('aria-checked', 'false');
         elem.classList.add('not-liked');
         elem.classList.remove('liked');
         elem.innerHTML = '<i class="far fa-heart"></i>';
@@ -152,9 +153,14 @@ const post2html = post => {
         <img class = "post" alt = "image captioned ${post.caption}" src = "${ post.image_url}"></img>
         <div class="icons">
             <div class="three">
-                <div onclick="toggleLike(event)" class = "${ post.current_user_like_id  ? 'liked' : 'not-liked'}" data-post-id="${post.id}"> 
+                <button onclick="toggleLike(event)" 
+                    class = "${ post.current_user_like_id  ? 'liked' : 'not-liked'}" 
+                    data-post-id="${post.id}" 
+                    liked="${ post.current_user_like_id  ? 'true' : 'false'}"
+                    aria-checked= "false"
+                    aria-label="Like"> 
                     <i class="fa${ post.current_user_like_id ? 's' : 'r' } fa-heart"></i>
-                </div>
+                </button>
                 <div> 
                     <i class="far fa-comment"></i>
                 </div>
@@ -162,9 +168,14 @@ const post2html = post => {
                     <i class="far fa-paper-plane"></i>
                 </div>   
             </div>
-            <div class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" onclick="toggleBookmark(event)" data-bookmark-id="${post.current_user_bookmark_id}" data-post-id="${post.id}">
+            <button class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" 
+                    onclick="toggleBookmark(event)" 
+                    aria-checked= "false"
+                    aria-label="Bookmark"
+                    data-bookmark-id="${post.current_user_bookmark_id}" 
+                    data-post-id="${post.id}">
                 <i class="fa${post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
-            </div>
+            </button>
         </div>
         <p class="likes">${ post.likes.length} likes </p>
         <div class="caption">
@@ -194,9 +205,14 @@ const post2html = post => {
         <img class = "post" alt = "image captioned ${post.caption}" src = "${ post.image_url}"></img>
         <div class="icons">
             <div class="three">
-                <div onclick="toggleLike(event)" class = "${ post.current_user_like_id  ? 'liked' : 'not-liked'}" data-post-id="${post.id}"> 
+                <button onclick="toggleLike(event)" 
+                    class = "${ post.current_user_like_id  ? 'liked' : 'not-liked'}" 
+                    data-post-id="${post.id}" 
+                    liked="${ post.current_user_like_id  ? 'true' : 'false'}"
+                    aria-checked= "false"
+                    aria-label="Like"> 
                     <i class="fa${ post.current_user_like_id ? 's' : 'r' } fa-heart"></i>
-                </div>
+                </button>
                 <div> 
                     <i class="far fa-comment"></i>
                 </div>
@@ -204,9 +220,14 @@ const post2html = post => {
                     <i class="far fa-paper-plane"></i>
                 </div>   
             </div>
-            <div class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" onclick="toggleBookmark(event)" data-bookmark-id="${post.current_user_bookmark_id}" data-post-id="${post.id}">
-                <i class="fa${ post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
-            </div>
+            <button class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" 
+                    onclick="toggleBookmark(event)" 
+                    aria-checked= "false"
+                    aria-label="Bookmark"
+                    data-bookmark-id="${post.current_user_bookmark_id}" 
+                    data-post-id="${post.id}">
+                <i class="fa${post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
+            </button>
         </div>
         <p class="likes">${ post.likes.length} likes</p>
         <div class="caption">
@@ -241,9 +262,14 @@ const post2html = post => {
         <img class = "post" alt = "image captioned ${post.caption}" src = "${ post.image_url}"></img>
         <div class="icons">
             <div class="three">
-                <div onclick="toggleLike(event)" class = "${ post.current_user_like_id  ? 'liked' : 'not-liked'} data-post-id="${post.id}"> 
+                <button onclick="toggleLike(event)" 
+                    class = "${ post.current_user_like_id  ? 'liked' : 'not-liked'}" 
+                    data-post-id="${post.id}" 
+                    liked="${ post.current_user_like_id  ? 'true' : 'false'}"
+                    aria-checked= "false"
+                    aria-label="Like"> 
                     <i class="fa${ post.current_user_like_id ? 's' : 'r' } fa-heart"></i>
-                </div>
+                </button>
                 <div> 
                     <i class="far fa-comment"></i>
                 </div>
@@ -251,9 +277,14 @@ const post2html = post => {
                     <i class="far fa-paper-plane"></i>
                 </div> 
             </div>
-            <div class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" onclick="toggleBookmark(event)" data-bookmark-id="${post.current_user_bookmark_id}" data-post-id="${post.id}">
-                <i class="fa${ post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
-            </div>
+            <button class="${ post.current_user_bookmark_id ? 'saved' : 'save' }" 
+                    onclick="toggleBookmark(event)" 
+                    aria-checked= "false"
+                    aria-label="Bookmark"
+                    data-bookmark-id="${post.current_user_bookmark_id}" 
+                    data-post-id="${post.id}">
+                <i class="fa${post.current_user_bookmark_id ? 's' : 'r' } fa-bookmark"></i>
+            </button>
         </div>
         <p class="likes">${ post.likes.length} likes</p>
         <div class="caption">
@@ -282,6 +313,7 @@ const post2html = post => {
 
 const showPostDetail = ev => {
     const elem = ev.currentTarget;
+    elem.classList.add("lastPressed");
     fetch(`/api/posts/${elem.dataset.postId}`)
         .then(response => response.json())
         .then(post => {
@@ -302,6 +334,7 @@ const showPostDetail = ev => {
                     </div>
                 </div>`;
                 document.querySelector('#modal-container').innerHTML = html;
+                document.getElementById("close").focus();
 
             
     });
@@ -309,6 +342,8 @@ const showPostDetail = ev => {
 
 const destroyModal = ev => {
     document.querySelector('#modal-container').innerHTML = "";
+    document.getElementsByClassName("lastPressed")[0].focus();
+    document.getElementsByClassName("lastPressed")[0].classList.remove("lastPressed");
 };
 
 const comment2html = comment => {
@@ -325,6 +360,12 @@ const comment2html = comment => {
         </div>`;
     return html;
 }
+
+document.addEventListener('keydown', function(event){
+	if((event.key === "Escape") && (document.querySelector('#modal-container').innerHTML != "")) {
+		destroyModal();
+	};
+});
 
 const getPosts = () => {
     fetch('/api/posts/')

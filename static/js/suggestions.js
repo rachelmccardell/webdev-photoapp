@@ -8,7 +8,7 @@ const toggleFollow = ev  => {
     };
 };
 
-const followUser = (userId, elem) => {
+const followUser = (userId, elem) => { 
     const postData = {
         "user_id": parseInt(userId)
     };
