@@ -26,6 +26,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 api = Api(app)
 
+#JWT config variables and manager (add after app object created):
+app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET')
+app.config["JWT_TOKEN_LOCATION"] = ["headers", "cookies"]
+app.config["JWT_COOKIE_SECURE"] = False
+jwt = flask_jwt_extended.JWTManager(app)
+
 # set logged in user
 with app.app_context():
     app.current_user = User.query.filter_by(id=12).one()
@@ -41,15 +47,10 @@ post_likes.initialize_routes(api)
 profile.initialize_routes(api)
 stories.initialize_routes(api)
 suggestions.initialize_routes(api)
+# Initialize routes of 2 new views
+authentication.initialize_routes(app)
+token.initialize_routes(api)
 
-
-# Server-side template for the homepage:
-@app.route('/')
-def home():
-    return render_template(
-        'starter-client.html', 
-        user=app.current_user
-    )
 
 @app.route('/suggestions')
 def lab06():
@@ -65,25 +66,26 @@ def hw4_posts():
         user=app.current_user
     )   
 
-@app.route('/api')
-def api_docs():
-    navigator = ApiNavigator(app.current_user)
+@app.route('/')
+@decorators.jwt_or_login
+def home():
     return render_template(
-        'api/api-docs.html', 
-        user=app.current_user,
-        endpoints=navigator.get_endpoints(),
-        url_root=request.url_root[0:-1] # trim trailing slash
+        'starter-client.html',
+        user=flask_jwt_extended.current_user
     )
 
-#JWT config variables and manager (add after app object created):
-app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET')
-app.config["JWT_TOKEN_LOCATION"] = ["headers", "cookies"]
-app.config["JWT_COOKIE_SECURE"] = False
-jwt = flask_jwt_extended.JWTManager(app)
 
-# Initialize routes of 2 new views
-authentication.initialize_routes(app)
-token.initialize_routes(api)
+
+#@app.route('/api')
+#def api_docs():
+#navigator = ApiNavigator(app.current_user)
+#return render_template(
+#'api/api-docs.html',
+#user=app.current_user,
+#endpoints=navigator.get_endpoints(),
+#url_root=request.url_root[0:-1] # trim trailing slash
+#)
+
 
 
 # Updated API endpoint includes a reference to
