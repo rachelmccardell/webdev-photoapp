@@ -16,6 +16,7 @@ const followUser = (userId, elem) => {
         method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': getCookie('csrf_access_token')
             },
             body: JSON.stringify(postData)
         })
@@ -34,6 +35,9 @@ const unfollowUser = (followingId, elem) => {
     const deleteURL = `/api/following/${followingId}`;
     fetch(deleteURL, {
         method: "DELETE",
+        headers: {
+            'X-CSRF-TOKEN': getCookie('csrf_access_token')
+        },
     })
     .then(response => response.json())
     .then(data => {

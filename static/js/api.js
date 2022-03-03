@@ -65,7 +65,7 @@ const sendPostPatchRequest = (elem, url, method, body) => {
             method: method.toUpperCase(),
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': getCookie('csrf_access_token')
+                'X-CSRF-TOKEN': getCookie('csrf_access_token') 
             },
             body: JSON.stringify(body),
         })
