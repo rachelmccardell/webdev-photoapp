@@ -4,6 +4,7 @@ from models import Bookmark, db, Post
 import json
 from . import can_view_post
 from my_decorators import handle_db_insert_error
+import flask_jwt_extended
 
 class BookmarksListEndpoint(Resource):
     # 1. Lists all bookmarks
@@ -12,6 +13,7 @@ class BookmarksListEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def get(self):
         # Your code here 
         '''
@@ -85,7 +87,6 @@ class BookmarkDetailEndpoint(Resource):
         if len(bookmarks) == 0:
             return Response(json.dumps({'message': 'You have no bookmarks.'}), mimetype="application/json", status=404)
         # Cycle through all users' bookmarks. Check if user bookmarked this bookmark. If yes, delete. Else, tell user bookmark not found.
-        print("here")
         for bookmark in bookmarks:
             if bookmark.id == id:
                 Bookmark.query.filter_by(id=id).delete()
@@ -102,12 +103,12 @@ def initialize_routes(api):
         BookmarksListEndpoint, 
         '/api/bookmarks', 
         '/api/bookmarks/', 
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )
 
     api.add_resource(
         BookmarkDetailEndpoint, 
         '/api/bookmarks/<id>', 
         '/api/bookmarks/<id>',
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )

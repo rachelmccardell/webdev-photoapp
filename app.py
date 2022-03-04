@@ -33,8 +33,16 @@ app.config["JWT_COOKIE_SECURE"] = False
 jwt = flask_jwt_extended.JWTManager(app)
 
 # set logged in user
-with app.app_context():
-    app.current_user = User.query.filter_by(id=12).one()
+# with app.app_context():
+#     app.current_user = User.query.filter_by(id=12).one()
+
+# defines the function for retrieving a user from the database
+@jwt.user_lookup_loader
+def user_lookup_callback(_jwt_header, jwt_data):
+    # print('JWT data:', jwt_data)
+    # https://flask-jwt-extended.readthedocs.io/en/stable/automatic_user_loading/
+    user_id = jwt_data["sub"]
+    return User.query.filter_by(id=user_id).one_or_none()
 
 
 # Initialize routes for all of your API endpoints:
@@ -98,7 +106,7 @@ def api_docs():
     navigator = ApiNavigator(flask_jwt_extended.current_user)
     return render_template(
                            'api/api-docs.html',
-                           user=app.current_user,  #TODO: change to flask_jwt_extended.current_user
+                           user=flask_jwt_extended.current_user,  #TODO: change to flask_jwt_extended.current_user
                            endpoints=navigator.get_endpoints(),
                            access_token=access_token,
                            csrf=csrf,

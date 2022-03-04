@@ -3,7 +3,7 @@ from flask_restful import Resource
 from models import Post, db
 
 from views import security, get_authorized_user_ids
-
+import flask_jwt_extended
 import json
 
 def get_path():
@@ -14,6 +14,7 @@ class PostListEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
 
+    @flask_jwt_extended.jwt_required()
     def get(self):
         ids = get_authorized_user_ids(self.current_user)
         posts = Post.query.filter(Post.user_id.in_(ids))
@@ -94,10 +95,10 @@ def initialize_routes(api):
     api.add_resource(
         PostListEndpoint, 
         '/api/posts', '/api/posts/', 
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )
     api.add_resource(
         PostDetailEndpoint, 
         '/api/posts/<id>', '/api/posts/<id>/',
-        resource_class_kwargs={'current_user': api.app.current_user}
+        resource_class_kwargs={'current_user': flask_jwt_extended.current_user}
     )
