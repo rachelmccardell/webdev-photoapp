@@ -10,6 +10,7 @@ class CommentListEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def post(self):
         # Your code here
         body = request.get_json()
@@ -42,6 +43,7 @@ class CommentDetailEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
   
+    @flask_jwt_extended.jwt_required()
     def delete(self, id):
         # Make sure valid id
         if not str.isdigit(id):

@@ -1,3 +1,19 @@
+const getCookie3 = key => {
+    let name = key + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+};
+
 const toggleFollow = ev  => {
     const elem = ev.currentTarget;
     if (elem.getAttribute('aria-checked') === 'true') {
@@ -16,7 +32,7 @@ const followUser = (userId, elem) => {
         method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': getCookie('csrf_access_token')
+                'X-CSRF-TOKEN': getCookie3('csrf_access_token')
             },
             body: JSON.stringify(postData)
         })
@@ -36,7 +52,7 @@ const unfollowUser = (followingId, elem) => {
     fetch(deleteURL, {
         method: "DELETE",
         headers: {
-            'X-CSRF-TOKEN': getCookie('csrf_access_token')
+            'X-CSRF-TOKEN': getCookie3('csrf_access_token')
         },
     })
     .then(response => response.json())

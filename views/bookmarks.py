@@ -29,6 +29,7 @@ class BookmarksListEndpoint(Resource):
         ]
         return Response(json.dumps(bookmark_list_of_dictionaries), mimetype="application/json", status=200)
  
+    @flask_jwt_extended.jwt_required()
     @handle_db_insert_error
     def post(self):
         # Your code here
@@ -71,7 +72,8 @@ class BookmarkDetailEndpoint(Resource):
 
     def __init__(self, current_user):
         self.current_user = current_user
-    
+        
+    @flask_jwt_extended.jwt_required()
     def delete(self, id):
         # Make sure correct format id
         try:

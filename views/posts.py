@@ -37,6 +37,7 @@ class PostListEndpoint(Resource):
         ]
         return Response(json.dumps(data), mimetype="application/json", status=200)
 
+    @flask_jwt_extended.jwt_required()
     def post(self):
         body = request.get_json()
         image_url = body.get('image_url')
@@ -57,7 +58,7 @@ class PostDetailEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
         
-    
+    @flask_jwt_extended.jwt_required()
     @security.id_is_valid
     @security.user_can_edit_post
     def patch(self, id):
@@ -74,6 +75,7 @@ class PostDetailEndpoint(Resource):
         db.session.commit()        
         return Response(json.dumps(post.to_dict(user=self.current_user)), mimetype="application/json", status=200)
     
+    @flask_jwt_extended.jwt_required()
     @security.id_is_valid
     @security.user_can_edit_post
     def delete(self, id):
@@ -85,6 +87,7 @@ class PostDetailEndpoint(Resource):
         }
         return Response(json.dumps(serialized_data), mimetype="application/json", status=200)
 
+    @flask_jwt_extended.jwt_required()
     @security.id_is_valid
     @security.user_can_view_post
     def get(self, id):

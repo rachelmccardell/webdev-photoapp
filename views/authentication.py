@@ -32,7 +32,7 @@ def login():
             return render_template(
                 'login.html',
                 message='Invalid username'
-            )
+            ) 
     else:
         return render_template(
             'login.html'

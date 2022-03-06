@@ -64,7 +64,7 @@ const sendPostPatchRequest = (elem, url, method, body) => {
     fetch(url, {
             method: method.toUpperCase(),
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json', 
                 'X-CSRF-TOKEN': getCookie('csrf_access_token') 
             },
             body: JSON.stringify(body),
@@ -75,6 +75,7 @@ const sendPostPatchRequest = (elem, url, method, body) => {
         })
         .then(data => displayResponse(data, elem));
 };
+
 
 const sendDeleteRequest = (elem, url) => {
     elem.classList.remove('active');

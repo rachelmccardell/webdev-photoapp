@@ -10,6 +10,7 @@ class PostLikesListEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def post(self, post_id):
         # Check format of post_id
         try:
@@ -39,6 +40,7 @@ class PostLikesDetailEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def delete(self, post_id, id):
          # Make sure valid id
         try:

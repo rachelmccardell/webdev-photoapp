@@ -19,6 +19,7 @@ class FollowingListEndpoint(Resource):
         ]
         return Response(json.dumps(following), mimetype="application/json", status=200)
 
+    @flask_jwt_extended.jwt_required()
     def post(self):
         # Make sure request contains id
         body = request.get_json()
@@ -60,6 +61,7 @@ class FollowingDetailEndpoint(Resource):
     def __init__(self, current_user):
         self.current_user = current_user
     
+    @flask_jwt_extended.jwt_required()
     def delete(self, id):
        # Make sure valid id
         try:
