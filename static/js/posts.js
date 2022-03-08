@@ -30,7 +30,7 @@ const bookmarkPost = (postId, elem) => {
     const postData = {
         "post_id": parseInt(postId)
     };
-    fetch("http://localhost:5000/api/bookmarks/", {
+    fetch("/api/bookmarks/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const bookmarkPost = (postId, elem) => {
 };
 
 const unBookmarkPost = (bookmarkId, elem) => {
-    fetch(`http://localhost:5000/api/bookmarks/${bookmarkId}`, {
+    fetch(`/api/bookmarks/${bookmarkId}`, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const toggleLike = ev  => {
 
 const likePost = (postId, elem) => {
     const postData = {};
-    fetch(`http://localhost:5000/api/posts/${postId}/likes/`, {
+    fetch(`/api/posts/${postId}/likes/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const likePost = (postId, elem) => {
 };
 
 const unLikePost = (postId, likeId, elem) => {
-    fetch(`http://localhost:5000/api/posts/${postId}/likes/${likeId}`, {
+    fetch(`/api/posts/${postId}/likes/${likeId}`, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const postComment = (ev, new_comment) => {
         "post_id": parseInt(elem.dataset.postId),
         "text": new_comment
     };
-    fetch("http://localhost:5000/api/comments", {
+    fetch("/api/comments", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
